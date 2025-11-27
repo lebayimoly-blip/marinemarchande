@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Déclaration d’arrivée</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script>
+    async function loadMarchandises() {
+      const imo = document.getElementById("navireSelect").value;
+      if (imo) {
+        const response = await fetch(`/declarations/marchandises/${imo}`);
+        const html = await response.text();
+        document.getElementById("marchandisesList").innerHTML = html;
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <header>
+    <h1>📥 Déclaration d’arrivée</h1>
+  </header>
+
+  <section class="card">
+    <form method="post" action="/declarations/arrivee/download">
+      <!-- Menu déroulant des navires -->
+      <div class="form-row">
+        <label>Nom du navire</label>
+        <select id="navireSelect" name="navire_imo" onchange="loadMarchandises()" required>
+          <option value="">-- Sélectionnez un navire --</option>
+          {% for navire in navires %}
+            <option value="{{ navire.imo }}">{{ navire.nom }} (IMO: {{ navire.imo }})</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Port d’arrivée -->
+      <div class="form-row">
+        <label>Port d’arrivée</label>
+        <input type="text" name="port" required>
+      </div>
+
+      <!-- Date d’arrivée -->
+      <div class="form-row">
+        <label>Date d’arrivée</label>
+        <input type="date" name="date" required>
+      </div>
+
+      <!-- Marchandises embarquées (chargées dynamiquement) -->
+      <div class="form-row">
+        <label>Marchandises embarquées</label>
+        <div id="marchandisesList">
+          <em>Sélectionnez un navire pour voir ses marchandises</em>
+        </div>
+      </div>
+
+      <button type="submit">📄 Télécharger la déclaration</button>
+    </form>
+  </section>
+
+  <footer>
+    MarineGab — Par <font color="#FFD700"><b>OLOUOMO LAB</b></font> © 2025
+  </footer>
+
+</body>
+</html>

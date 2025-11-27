@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Navires</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Navires</h1>
+    <nav>
+      <a href="/">Accueil</a>
+      <a href="/ports">Ports</a>
+      <a href="/marchandises">Marchandises</a>
+      <a href="/manifests">Manifests</a>
+      <a href="/inspections">Inspections</a>
+    </nav>
+  </header>
+
+  <section class="card">
+    <h2>Liste des navires</h2>
+    <ul class="list">
+      {% for navire in navires %}
+        <li>
+          <strong>{{ navire.nom }}</strong>
+          — IMO: {{ navire.imo }}
+          — Pavillon: {{ navire.pavillon if navire.pavillon else "N/A" }}
+          — Année: {{ navire.annee_construction if navire.annee_construction else "N/A" }}
+          — Tonnage: {{ navire.tonnage if navire.tonnage else "N/A" }}
+          — Type: {{ navire.type if navire.type else "N/A" }}
+          — Dernier port: {{ navire.dernier_port if navire.dernier_port else "N/A" }}
+          — Destination: {{ navire.prochaine_destination if navire.prochaine_destination else "N/A" }}
+          — Statut: {{ navire.statut_actuel if navire.statut_actuel else "N/A" }}
+          — Autres: {{ navire.autres if navire.autres else "N/A" }}
+
+          <form action="/navires/{{ navire.id }}" method="get" style="display:inline;">
+            <button type="submit">Voir détails</button>
+          </form>
+          <form action="/navires/{{ navire.id }}/edit" method="get" style="display:inline;">
+            <button type="submit">Modifier</button>
+          </form>
+          <form action="/navires/{{ navire.id }}/delete" method="post" style="display:inline;">
+            <button type="submit" onclick="return confirm('Supprimer ce navire ?')">Supprimer</button>
+          </form>
+        </li>
+      {% else %}
+        <li>Aucun navire enregistré.</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Ajouter un navire</h2>
+    <form action="/navires/add" method="post">
+      <div class="form-row"><label>Nom</label><input type="text" name="nom" required></div>
+      <div class="form-row"><label>IMO</label><input type="text" name="imo" required></div>
+      <div class="form-row"><label>Pavillon</label><input type="text" name="pavillon"></div>
+      <div class="form-row"><label>Année de construction</label><input type="number" name="annee_construction"></div>
+      <div class="form-row"><label>Tonnage (en tonnes)</label><input type="number" step="0.01" name="tonnage"></div>
+      <div class="form-row"><label>Type de navire</label><input type="text" name="type"></div>
+      <div class="form-row"><label>Dernier port d’escale</label><input type="text" name="dernier_port"></div>
+      <div class="form-row"><label>Prochaine destination</label><input type="text" name="prochaine_destination"></div>
+      <div class="form-row"><label>Statut actuel</label><input type="text" name="statut_actuel"></div>
+      <div class="form-row"><label>Autres</label><textarea name="autres"></textarea></div>
+      <button type="submit">Ajouter</button>
+    </form>
+  </section>
+
+  <footer>
+    MarineGab — Libreville, Gabon © 2025
+  </footer>
+</body>
+</html>

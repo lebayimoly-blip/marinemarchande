@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Inspections</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Inspections</h1>
+    <nav>
+      <a href="/">Accueil</a>
+      <a href="/navires">Navires</a>
+      <a href="/ports">Ports</a>
+      <a href="/marchandises">Marchandises</a>
+      <a href="/manifests">Manifests</a>
+    </nav>
+  </header>
+
+  <section class="card">
+    <h2>Liste des inspections</h2>
+    <ul class="list">
+      {% for inspection in inspections %}
+        <li>
+          <strong>Date :</strong> {{ inspection.date }} —
+          <strong>Navire IMO :</strong> {{ inspection.navire_imo }} —
+          <strong>Port :</strong> {{ inspection.port_nom }} —
+          <strong>Inspecteur :</strong> {{ inspection.inspecteur }}
+
+          <!-- Boutons d’action -->
+          <form action="/inspections/{{ inspection.id }}/edit" method="get" style="display:inline;">
+            <button type="submit">Modifier</button>
+          </form>
+          <form action="/inspections/{{ inspection.id }}/delete" method="post" style="display:inline;">
+            <button type="submit" onclick="return confirm('Supprimer cette inspection ?')">Supprimer</button>
+          </form>
+          <form action="/inspections/{{ inspection.id }}/download" method="get" style="display:inline;">
+            <button type="submit">Télécharger la fiche</button>
+          </form>
+        </li>
+      {% else %}
+        <li>Aucune inspection enregistrée.</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Ajouter une inspection</h2>
+    <form action="/inspections/add" method="post">
+      <!-- Infos générales -->
+      <div class="form-row"><label>Date</label><input type="date" name="date" required></div>
+      <div class="form-row"><label>Navire IMO</label><input type="text" name="navire_imo" required></div>
+      <div class="form-row"><label>Port</label><input type="text" name="port_nom" required></div>
+      <div class="form-row"><label>Inspecteur</label><input type="text" name="inspecteur" required></div>
+      <div class="form-row"><label>Rapport</label><textarea name="rapport"></textarea></div>
+
+      <!-- Certificats -->
+      <div class="form-row"><label>Certificat sécurité</label>
+        <select name="certificat_securite">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Certificat de classe</label>
+        <select name="certificat_classe">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Certificat pollution</label>
+        <select name="certificat_pollution">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+
+      <!-- Documents -->
+      <div class="form-row"><label>Brevets marins</label>
+        <select name="brevets_marins">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Certificats médicaux</label>
+        <select name="certificats_medicaux">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Journal de bord</label>
+        <select name="journal_bord">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Papiers douaniers</label>
+        <select name="papiers_douaniers">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+
+      <!-- Équipements -->
+      <div class="form-row"><label>Gilets & combinaisons</label>
+        <select name="gilets_combinaisons">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Radeaux & canots</label>
+        <select name="radeaux_canots">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Extincteurs</label>
+        <select name="extincteurs">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Alarmes & détecteurs</label>
+        <select name="alarmes_detecteurs">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Système anti-incendie</label>
+        <select name="systeme_incendie">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+
+      <!-- Normes -->
+      <div class="form-row"><label>Normes antipollution</label>
+        <select name="normes_antipollution">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Conditions de vie</label>
+        <select name="conditions_vie">
+          <option value="Conforme">Conforme</option>
+          <option value="Non conforme">Non conforme</option>
+        </select>
+      </div>
+
+      <!-- Observations -->
+      <div class="form-row"><label>Observations</label>
+        <textarea name="observations"></textarea>
+      </div>
+
+      <button type="submit">Ajouter</button>
+    </form>
+  </section>
+
+  <footer>
+    MarineGab — Libreville, Gabon © 2025
+  </footer>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Statistiques</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Statistiques</h1>
+    <nav>
+      <a href="/">Accueil</a>
+      <a href="/navires">Navires</a>
+      <a href="/ports">Ports</a>
+      <a href="/marchandises">Marchandises</a>
+      <a href="/manifests">Manifests</a>
+      <a href="/inspections">Inspections</a>
+    </nav>
+  </header>
+
+  <section class="card">
+    <h2>Filtrer par période</h2>
+    <form method="get" action="/stats">
+      <div class="form-row"><label>Début</label><input type="date" name="date_debut"></div>
+      <div class="form-row"><label>Fin</label><input type="date" name="date_fin"></div>
+      <button type="submit">Filtrer</button>
+    </form>
+  </section>
+
+<section class="card">
+  <h2>Résultats ({{ periode }})</h2>
+  <ul class="list">
+    <li>Inspections : {{ inspections }}
+      <form action="/stats/download/inspections" method="get" style="display:inline;">
+        <button type="submit">Télécharger</button>
+      </form>
+    </li>
+    <li>Navires total : {{ navires_total }} — À quai : {{ navires_a_quai }}
+      <form action="/stats/download/navires" method="get" style="display:inline;">
+        <button type="submit">Télécharger</button>
+      </form>
+    </li>
+    <li>Audits par inspecteur :
+      <ul>
+        {% for i, c in audits_par_inspecteur %}
+          <li>{{ i }} : {{ c }}</li>
+        {% endfor %}
+      </ul>
+      <form action="/stats/download/audits" method="get" style="display:inline;">
+        <button type="submit">Télécharger</button>
+      </form>
+    </li>
+    <li>Chiffre global : {{ global_total }}
+      <form action="/stats/download/global" method="get" style="display:inline;">
+        <button type="submit">Télécharger</button>
+      </form>
+    </li>
+  </ul>
+</section>
+  <footer>
+    MarineGab — Libreville, Gabon © 2025
+  </footer>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Détails du navire</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Détails du navire</h1>
+    <nav><a href="/navires">Retour à la liste</a></nav>
+  </header>
+
+  <section class="card">
+    <h2>{{ navire.nom }}</h2>
+    <p><strong>IMO :</strong> {{ navire.imo }}</p>
+    <p><strong>Pavillon :</strong> {{ navire.pavillon if navire.pavillon else "N/A" }}</p>
+    <p><strong>Année de construction :</strong> {{ navire.annee_construction if navire.annee_construction else "N/A" }}</p>
+    <p><strong>Tonnage :</strong> {{ navire.tonnage if navire.tonnage else "N/A" }}</p>
+    <p><strong>Type :</strong> {{ navire.type if navire.type else "N/A" }}</p>
+    <p><strong>Dernier port d’escale :</strong> {{ navire.dernier_port if navire.dernier_port else "N/A" }}</p>
+    <p><strong>Prochaine destination :</strong> {{ navire.prochaine_destination if navire.prochaine_destination else "N/A" }}</p>
+    <p><strong>Statut actuel :</strong> {{ navire.statut_actuel if navire.statut_actuel else "N/A" }}</p>
+    <p><strong>Autres :</strong> {{ navire.autres if navire.autres else "N/A" }}</p>
+
+    <!-- Bouton Télécharger la fiche -->
+    <form action="/navires/{{ navire.id }}/download" method="get" style="margin-top:15px;">
+      <button type="submit">Télécharge la fiche</button>
+    </form>
+  </section>
+</body>
+</html>

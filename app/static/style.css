@@ -1,0 +1,181 @@
+:root {
+  --marine-blue: #003366;
+  --marine-green: #007A3D;
+  --marine-gold: #FFD700;
+  --marine-light: #F5F5F5;
+  --text-dark: #222;
+  --text-light: #fff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  background-color: var(--marine-light);
+  color: var(--text-dark);
+}
+
+/* HEADER */
+header {
+  background: linear-gradient(to right, var(--marine-blue), var(--marine-green));
+  color: var(--text-light);
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+header h1::before {
+  content: "⚓ ";
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+header p {
+  margin: 0.2rem 0 1rem;
+  font-weight: 300;
+}
+
+/* NAVIGATION */
+nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--marine-gold);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--text-light);
+}
+
+/* CARD SECTIONS */
+.card {
+  background-color: white;
+  margin: 2rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px var(--card-shadow);
+}
+
+h2 {
+  color: var(--marine-blue);
+  margin-top: 0;
+}
+
+/* BUTTONS */
+button {
+  background-color: var(--marine-green);
+  color: var(--text-light);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--marine-blue);
+}
+
+/* FORM ELEMENTS */
+.form-row {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="date"] {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* LISTS */
+ul.list {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul.list li::before {
+  content: "📊 ";
+  margin-right: 0.5rem;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--marine-blue);
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  header, .card {
+    padding: 1rem;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+/* Dropdown menu */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: var(--marine-green);
+  color: var(--text-light);
+  padding: 8px 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.dropbtn:hover {
+  background-color: var(--marine-blue);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 220px;
+  box-shadow: 0 2px 6px var(--card-shadow);
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: var(--marine-blue);
+  padding: 10px 14px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--marine-light);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

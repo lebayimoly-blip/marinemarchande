@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Détails de l’inspection</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Détails de l’inspection</h1>
+    <nav><a href="/inspections">Retour à la liste</a></nav>
+  </header>
+
+  <section class="card">
+    <h2>Inspection du {{ inspection.date }}</h2>
+    <p><strong>Navire IMO :</strong> {{ inspection.navire_imo }}</p>
+    <p><strong>Port :</strong> {{ inspection.port_nom }}</p>
+    <p><strong>Inspecteur :</strong> {{ inspection.inspecteur }}</p>
+    <p><strong>Rapport :</strong> {{ inspection.rapport if inspection.rapport else "N/A" }}</p>
+
+    <!-- Certificats -->
+    <h3>Certificats</h3>
+    <p>Sécurité : {{ inspection.certificat_securite }}</p>
+    <p>Classe : {{ inspection.certificat_classe }}</p>
+    <p>Pollution : {{ inspection.certificat_pollution }}</p>
+
+    <!-- Documents -->
+    <h3>Documents</h3>
+    <p>Brevets marins : {{ inspection.brevets_marins }}</p>
+    <p>Certificats médicaux : {{ inspection.certificats_medicaux }}</p>
+    <p>Journal de bord : {{ inspection.journal_bord }}</p>
+    <p>Papiers douaniers : {{ inspection.papiers_douaniers }}</p>
+
+    <!-- Équipements -->
+    <h3>Équipements</h3>
+    <p>Gilets & combinaisons : {{ inspection.gilets_combinaisons }}</p>
+    <p>Radeaux & canots : {{ inspection.radeaux_canots }}</p>
+    <p>Extincteurs : {{ inspection.extincteurs }}</p>
+    <p>Alarmes & détecteurs : {{ inspection.alarmes_detecteurs }}</p>
+    <p>Système anti-incendie : {{ inspection.systeme_incendie }}</p>
+
+    <!-- Normes -->
+    <h3>Normes</h3>
+    <p>Antipollution : {{ inspection.normes_antipollution }}</p>
+    <p>Conditions de vie : {{ inspection.conditions_vie }}</p>
+
+    <!-- Observations -->
+    <h3>Observations</h3>
+    <p>{{ inspection.observations if inspection.observations else "Aucune observation" }}</p>
+
+    <!-- Boutons d’action -->
+    <form action="/inspections/{{ inspection.id }}/edit" method="get" style="display:inline;">
+      <button type="submit">Modifier</button>
+    </form>
+    <form action="/inspections/{{ inspection.id }}/delete" method="post" style="display:inline;">
+      <button type="submit" onclick="return confirm('Supprimer cette inspection ?')">Supprimer</button>
+    </form>
+    <form action="/inspections/{{ inspection.id }}/download" method="get" style="display:inline;">
+      <button type="submit">Télécharger la fiche</button>
+    </form>
+  </section>
+
+  <footer>
+    MarineGab — Libreville, Gabon © 2025
+  </footer>
+</body>
+</html>

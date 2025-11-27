@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Ports</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Ports</h1>
+    <nav>
+      <a href="/">Accueil</a>
+      <a href="/navires">Navires</a>
+      <a href="/marchandises">Marchandises</a>
+      <a href="/manifests">Manifests</a>
+      <a href="/inspections">Inspections</a>
+    </nav>
+  </header>
+
+  <section class="card">
+    <h2>Liste des ports</h2>
+    <ul class="list">
+      {% for port in ports %}
+        <li>
+          <strong>{{ port.nom }}</strong>
+          — Pays: {{ port.pays if port.pays else "N/A" }}
+          — Ville: {{ port.ville if port.ville else "N/A" }}
+          — Capacité: {{ port.capacite if port.capacite else "N/A" }}
+          — Type: {{ port.type if port.type else "N/A" }}
+          — Coordonnées: {{ port.coordonnees if port.coordonnees else "N/A" }}
+          — Responsable: {{ port.responsable if port.responsable else "N/A" }}
+
+          <!-- Bouton modifier -->
+          <form action="/ports/{{ port.id }}/edit" method="get" style="display:inline;">
+            <button type="submit">Modifier</button>
+          </form>
+
+          <!-- Bouton supprimer -->
+          <form action="/ports/{{ port.id }}/delete" method="post" style="display:inline;">
+            <button type="submit" onclick="return confirm('Supprimer ce port ?')">Supprimer</button>
+          </form>
+        </li>
+      {% else %}
+        <li>Aucun port enregistré.</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Ajouter un port</h2>
+    <form action="/ports/add" method="post">
+      <div class="form-row"><label>Nom</label><input type="text" name="nom" required></div>
+      <div class="form-row"><label>Pays</label><input type="text" name="pays"></div>
+      <div class="form-row"><label>Ville</label><input type="text" name="ville"></div>
+      <div class="form-row"><label>Capacité</label><input type="number" step="0.01" name="capacite"></div>
+      <div class="form-row"><label>Type</label><input type="text" name="type"></div>
+      <div class="form-row"><label>Coordonnées</label><input type="text" name="coordonnees"></div>
+      <div class="form-row"><label>Responsable</label><input type="text" name="responsable"></div>
+      <button type="submit">Ajouter</button>
+    </form>
+  </section>
+
+  <footer>
+    MarineGab — Libreville, Gabon © 2025
+  </footer>
+</body>
+</html>

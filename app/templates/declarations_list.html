@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>MarineGab — Liste des Déclarations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <header>
+    <h1>📑 Liste des Déclarations</h1>
+    <p>Historique des déclarations d’arrivée et des autorisations de départ.</p>
+  </header>
+
+  <section class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Navire</th>
+          <th>Date</th>
+          <th>Port</th>
+          <th>Destination / Marchandises</th>
+          <th>PDF</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for decl in declarations %}
+        <tr>
+          <td>{{ decl.type }}</td>
+          <td>{{ decl.navire_nom }}</td>
+          <td>{{ decl.date }}</td>
+          <td>{{ decl.port }}</td>
+          <td>
+            {% if decl.type == "Arrivée" %}
+              {{ decl.marchandises }}
+            {% else %}
+              {{ decl.destination }}
+            {% endif %}
+          </td>
+          <td>
+            <a href="/static/{{ decl.fichier_pdf }}" target="_blank">📄 Télécharger</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    MarineGab — Par <font color="#FFD700"><b>OLOUOMO LAB</b></font> © 2025
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>MarineGab — Accueil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    /* Widgets colorés */
+    .stats-container {
+      display: flex;
+      justify-content: space-around;
+      margin: 2rem 0;
+    }
+    .widget {
+      flex: 1;
+      margin: 0 1rem;
+      padding: 1.5rem;
+      border-radius: 10px;
+      color: #fff;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    .widget h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .widget p {
+      font-size: 2rem;
+      margin: 0;
+    }
+    .bg-blue { background: #007BFF; }
+    .bg-green { background: #28A745; }
+    .bg-orange { background: #FD7E14; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1>MarineGab 🚢</h1>
+      <p>Plateforme unifiée pour la gestion maritime gabonaise.</p>
+    </div>
+    <nav>
+      <a href="/navires">Navires</a>
+      <a href="/ports">Ports</a>
+      <a href="/marchandises">Marchandises</a>
+      <a href="/inspections">Inspections</a>
+      <a href="/stats">Statistiques</a>
+
+      <!-- Menu déroulant Déclarations -->
+      <div class="dropdown">
+        <button class="dropbtn">Déclarations ⏷</button>
+        <div class="dropdown-content">
+          <a href="/declarations/arrivee">📥 Déclaration d’arrivée</a>
+          <a href="/declarations/depart">📤 Autorisation de départ</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Widgets statistiques -->
+  <section class="stats-container">
+    <div class="widget bg-blue">
+      <h3>Navires à quai</h3>
+      <p>{{ navires_a_quai }}</p>
+    </div>
+    <div class="widget bg-green">
+      <h3>Inspections du mois</h3>
+      <p>{{ inspections_mois }}</p>
+    </div>
+    <div class="widget bg-orange">
+      <h3>Marchandises en base</h3>
+      <p>{{ marchandises_total }}</p>
+    </div>
+  </section>
+
+  <footer>
+    MarineGab — Par <span style="color:#FFD700; font-weight:bold;">OLOUOMO LAB</span> © 2025
+  </footer>
+
+</body>
+</html>

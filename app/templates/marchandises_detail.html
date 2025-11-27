@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Détails de la marchandise</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Détails de la marchandise</h1>
+    <nav><a href="/marchandises">Retour à la liste</a></nav>
+  </header>
+
+  <section class="card">
+    <h2>{{ marchandise.nom }}</h2>
+    <p><strong>Type :</strong> {{ marchandise.type if marchandise.type else "N/A" }}</p>
+    <p><strong>Poids :</strong> {{ marchandise.poids }}</p>
+    <p><strong>Volume :</strong> {{ marchandise.volume }}</p>
+    <p><strong>Tracking Number :</strong> {{ marchandise.tracking_number }}</p>
+    <p><strong>Navire associé :</strong>
+      {% if marchandise.navire %}
+        {{ marchandise.navire.nom }} (IMO: {{ marchandise.navire.imo }})
+      {% else %}
+        N/A
+      {% endif %}
+    </p>
+
+    <!-- Bouton Télécharger la fiche -->
+    <form action="/marchandises/{{ marchandise.id }}/download" method="get" style="margin-top:15px;">
+      <button type="submit">Télécharger la fiche</button>
+    </form>
+  </section>
+</body>
+</html>

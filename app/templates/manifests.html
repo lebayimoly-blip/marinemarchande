@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Manifests</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Manifests</h1>
+    <nav>
+      <a href="/">Accueil</a>
+      <a href="/navires">Navires</a>
+      <a href="/ports">Ports</a>
+      <a href="/marchandises">Marchandises</a>
+      <a href="/inspections">Inspections</a>
+    </nav>
+  </header>
+
+  <section class="card">
+    <h2>Liste des manifests</h2>
+    <ul class="list">
+      {% for manifest in manifests %}
+        <li>
+          <strong>{{ manifest.numero_manifest }}</strong> — {{ manifest.date }}
+          — Navire IMO: {{ manifest.navire_imo }}
+          — Départ: {{ manifest.port_depart_nom }}
+          — Arrivée: {{ manifest.port_arrivee_nom }}
+        </li>
+      {% else %}
+        <li>Aucun manifest enregistré.</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Ajouter un manifest</h2>
+    <form action="/manifests/add" method="post">
+      <div class="form-row">
+        <label for="numero_manifest">Numéro</label>
+        <input id="numero_manifest" type="text" name="numero_manifest" required>
+      </div>
+      <div class="form-row">
+        <label for="date">Date</label>
+        <input id="date" type="date" name="date" required>
+      </div>
+      <div class="form-row">
+        <label for="navire_imo">Navire IMO</label>
+        <input id="navire_imo" type="text" name="navire_imo" required>
+      </div>
+      <div class="form-row">
+        <label for="port_depart_nom">Port départ</label>
+        <input id="port_depart_nom" type="text" name="port_depart_nom" required>
+      </div>
+      <div class="form-row">
+        <label for="port_arrivee_nom">Port arrivée</label>
+        <input id="port_arrivee_nom" type="text" name="port_arrivee_nom" required>
+      </div>
+      <button type="submit">Ajouter</button>
+    </form>
+  </section>
+
+  <footer>
+    MarineGab — Libreville, Gabon © 2025
+  </footer>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Autorisation de départ</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <header>
+    <h1>📤 Autorisation de départ</h1>
+  </header>
+
+  <section class="card">
+    <form method="post" action="/declarations/depart/download">
+      <!-- Menu déroulant des navires -->
+      <div class="form-row">
+        <label>Nom du navire</label>
+        <select name="navire_imo" required>
+          <option value="">-- Sélectionnez un navire --</option>
+          {% for navire in navires %}
+            <option value="{{ navire.imo }}">{{ navire.nom }} (IMO: {{ navire.imo }})</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Port de départ -->
+      <div class="form-row">
+        <label>Port de départ</label>
+        <input type="text" name="port" required>
+      </div>
+
+      <!-- Date de départ -->
+      <div class="form-row">
+        <label>Date de départ</label>
+        <input type="date" name="date" required>
+      </div>
+
+      <!-- Destination -->
+      <div class="form-row">
+        <label>Destination</label>
+        <input type="text" name="destination">
+      </div>
+
+      <!-- Sécurité du navire -->
+      <div class="form-row">
+        <label>Niveau de sécurité du navire</label>
+        <select name="securite" required>
+          <option value="">-- Sélectionnez un niveau --</option>
+          <option value="Niveau 1">Niveau 1 — Normal</option>
+          <option value="Niveau 2">Niveau 2 — Renforcé</option>
+          <option value="Niveau 3">Niveau 3 — Critique</option>
+        </select>
+      </div>
+
+      <!-- Déclaration de santé -->
+      <div class="form-row">
+        <label>Déclaration de santé (maladie, décès, quarantaine)</label>
+        <textarea name="sante" rows="4"></textarea>
+      </div>
+
+      <button type="submit">📄 Télécharger l’autorisation</button>
+    </form>
+  </section>
+
+  <footer>
+    MarineGab — Par <font color="#FFD700"><b>OLOUOMO LAB</b></font> © 2025
+  </footer>
+
+</body>
+</html>

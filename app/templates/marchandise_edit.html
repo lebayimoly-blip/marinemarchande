@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Modifier marchandise</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>Modifier marchandise</h1>
+    <nav><a href="/marchandises">Retour à la liste</a></nav>
+  </header>
+
+  <section class="card">
+    <form action="/marchandises/{{ marchandise.id }}/update" method="post">
+      <div class="form-row"><label>Nom</label><input type="text" name="nom" value="{{ marchandise.nom }}" required></div>
+      <div class="form-row"><label>Type</label><input type="text" name="type" value="{{ marchandise.type }}"></div>
+      <div class="form-row"><label>Poids (tonnes)</label><input type="number" step="0.01" name="poids" value="{{ marchandise.poids }}" required></div>
+      <div class="form-row"><label>Volume (m³)</label><input type="number" step="0.01" name="volume" value="{{ marchandise.volume }}" required></div>
+      <div class="form-row"><label>Numéro de tracking</label><input type="text" name="tracking_number" value="{{ marchandise.tracking_number }}" required></div>
+
+      <div class="form-row">
+        <label>Navire</label>
+        <select name="navire_id" required>
+          {% for navire in navires %}
+            <option value="{{ navire.id }}" {% if navire.id == marchandise.navire_id %}selected{% endif %}>
+              {{ navire.nom }} — IMO: {{ navire.imo }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit">Enregistrer</button>
+    </form>
+  </section>
+</body>
+</html>

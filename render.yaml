@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: marinegab
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    autoDeploy: true
+    envVars:
+      - key: SECRET_KEY
+        value: "a4d9a368899d681765a5f9b3e4a6abab83b5956ce2fa20490439caa791064cdd"
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        value: "postgresql://postgresql:Google99.@host:5432/marinegab.db"
+
