@@ -7,3 +7,6 @@ reportlab==4.0.9
 alembic==1.13.2
 psycopg2-binary==2.9.9   # si tu utilises PostgreSQL
 pydantic==2.9.2
+python-dotenv==1.0.1
+email-validator==2.1.0   # utile si tu valides des emails avec Pydantic
+passlib[bcrypt]==1.7.4   # utile pour gérer les mots de passe (hash)
