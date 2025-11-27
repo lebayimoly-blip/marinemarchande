@@ -3,12 +3,14 @@ services:
     name: marinemarchande-backend
     env: python
     plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
     autoDeploy: true
     envVars:
       - key: SECRET_KEY
-        value: "a4d9a368899d681765a5f9b3e4a6abab83b5956ce2fa20490439caa791064cdd"
+        value: a4d9a368899d681765a5f9b3e4a6abab83b5956ce2fa20490439caa791064cdd
+
 runtime:
-  pythonVersion: 3.11
+  pythonVersion: 3.12
+
 
